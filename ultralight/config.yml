@@ -1,0 +1,8 @@
+site:
+        title: Ultralight Wiki
+        description: The Ultralight Backpacking Wiki
+        main_page: ultralight
+        sidebar_pages: 
+                - ultralight
+                - tent
+                - backpack

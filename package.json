@@ -1,0 +1,41 @@
+{
+  "name": "maggie",
+  "description": "Git based wiki generator",
+  "version": "0.0.0",
+  "author": "Mackenzie Craig",
+  "bin": {
+    "maggie": "./bin/run"
+  },
+  "bugs": "https://github.com/tehp/maggie/issues",
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "homepage": "https://github.com/tehp/maggie",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "bin": "maggie"
+  },
+  "repository": "tehp/maggie",
+  "scripts": {
+    "prepack": "oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.2",
+    "yaml": "^1.10.0"
+  }
+}
