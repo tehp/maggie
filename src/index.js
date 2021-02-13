@@ -22,6 +22,14 @@ class MaggieCommand extends Command {
 		console.log('[maggie] Starting build...');
 		var input_dir = process.cwd() + '/' + flags.input;
 		console.log('Input directory: ' + input_dir);
+	
+		var output_dir = input_dir + '/dist';
+
+		console.log('Output directory: ' + output_dir);
+
+		if (!fs.existsSync(dir)){
+		    fs.mkdirSync(dir);
+		}
 
 		const file = fs.readFileSync(input_dir + '/' + 'config.yml', 'utf8');
 		var config = YAML.parse(file);
