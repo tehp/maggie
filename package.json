@@ -36,6 +36,7 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
+    "marked": "^2.0.0",
     "yaml": "^1.10.0"
   }
 }
