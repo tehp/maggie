@@ -21,7 +21,7 @@ function createHead(name) {
 	<head>
 		<title>${format_title(name)} - ${config.site.title}</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
-		<link rel="stylesheet" href="${output_dir}/css/custom.css">
+		<link rel="stylesheet" href="${output_dir}/../../css/default.css">
 	</head>
 	`;
 	return head;
@@ -65,9 +65,17 @@ function createSidebar(name) {
 	return sidebar;
 }
 
+function addLinks(html) {
+	all_topics.forEach(topic => {
+		html = html.replace(topic, `<a href="${topic}.html">${topic}</a>`);
+	});
+	return html;
+}
+
 function parseContent(name) {
 	var markdown = fs.readFileSync(input_dir + '/content/' + name + '.md').toString();
 	var html = marked(markdown);
+	var html = addLinks(html);
 	return '<h2>' + format_title(name) + '</h2>' + html;
 }
 
@@ -79,11 +87,6 @@ function createFile(name) {
 	console.log('Creating page: ' + name);
 
 	var filename = output_dir + '/' + name + '.html';
-
-	// if (fs.existsSync(filename)){
-	// 	fs.rmSync(filename);
-	// 	console.log('Deleting old version of file: ' + filename);
-	// }
 
 	filename = filename.slice(0, -4);
 	filename += "html";
@@ -103,15 +106,13 @@ function createFile(name) {
 }
 
 function scanFiles(path) {
-	var topics = [];
 	fs.readdir(path + '/content', (err, files) => {
 	  files.forEach(file => {
-		topics.push(file);
 	    createFile(file);
 	  });
-	  all_topics = topics;
 	});
 }
+
 
 class MaggieCommand extends Command {
   async run() {
@@ -140,8 +141,13 @@ class MaggieCommand extends Command {
 		config = YAML.parse(file);
 		config.input_dir = input_dir;
 
-		console.log(config);
+		var all_files = fs.readdirSync(config.input_dir + '/content');
+		all_files.forEach(topic => {
+			topic = topic.slice(0, -3);
+			all_topics.push(topic);
+		});
 
+		console.log(config);
 		scanFiles(config.input_dir);
 	}
   }
