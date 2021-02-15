@@ -133,7 +133,7 @@ class MaggieCommand extends Command {
 		input_dir = process.cwd() + '/' + flags.input;
 		console.log('Input directory: ' + input_dir);
 	
-		output_dir = input_dir + '/docs';
+		output_dir = input_dir + '/dist';
 
 		console.log('Output directory: ' + output_dir);
 
