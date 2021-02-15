@@ -30,11 +30,13 @@ function createHead(name) {
 function createHeader(name) {
 	var header = `
 	<body>
-	<div class="container">
-		<h1>${config.site.title}</h1>
-		<h4>${config.site.description}</h4>
-		<hr>
-	</div>
+	<a class="plain-link" href="index.html">
+		<div class="container">
+			<h1>${config.site.title}</h1>
+			<h4>${config.site.description}</h4>
+			<hr>
+		</div>
+	</a>
 	`
 	return header;
 }
@@ -59,15 +61,23 @@ function createSidebar(name) {
 	var sidebar = `
 	${config.site.motd}
 	<hr>
+	<h6>Search</h6>
+	<input class="u-full-width" type="search" placeholder="Tent... Backpack... Footwear..." id="wiki-search">
+	<hr>
 	<h6>Important pages:</h6>
 	<ul>${pages}</ul>
+	<hr>
+	
 	`
 	return sidebar;
 }
 
-function addLinks(html) {
+function addLinks(html, current_page) {
 	all_topics.forEach(topic => {
-		html = html.replace(topic, `<a href="${topic}.html">${topic}</a>`);
+		if (topic != current_page) {
+			html = html.replaceAll(' ' + topic + ' ', ` <a href="${topic}.html">${topic}</a> `);
+			html = html.replaceAll(' ' + topic + '.', ` <a href="${topic}.html">${topic}</a>.`);
+		}
 	});
 	return html;
 }
@@ -75,7 +85,7 @@ function addLinks(html) {
 function parseContent(name) {
 	var markdown = fs.readFileSync(input_dir + '/content/' + name + '.md').toString();
 	var html = marked(markdown);
-	var html = addLinks(html);
+	var html = addLinks(html, name);
 	return '<h2>' + format_title(name) + '</h2>' + html;
 }
 

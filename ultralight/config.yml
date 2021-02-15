@@ -4,6 +4,6 @@ site:
         motd: Welcome to the Ultralight Wiki. This site is currently a work in progress. If you would like to contribute to the content hosted here, please visit <a href="https://github.com/tehp/maggie">this page</a>.
         main_page: ultralight
         sidebar_pages: 
-                - ultralight
-                - tent
-                - backpack
+                - essentials
+                - philosophy
+                - safety
