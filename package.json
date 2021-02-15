@@ -28,6 +28,7 @@
   },
   "repository": "tehp/maggie",
   "scripts": {
+    "start": "./bin/run -i ultralight",
     "prepack": "oclif-dev readme",
     "test": "echo NO TESTS",
     "version": "oclif-dev readme && git add README.md"
